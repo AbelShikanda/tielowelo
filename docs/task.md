@@ -15,7 +15,7 @@
 
 ## Next — Foundation (Phase A)
 - [ ] Wire routes & layouts — Connect TourLayout/TourAuthenticatedLayout to Breeze pages + add routes/web.php so frontend is visible
-- [ ] A3: Authentication — Login, register, password reset, profile (Breeze + Sanctum)
+- [x] A3: Authentication — Login, register, password reset, profile (Breeze + Sanctum)
 - [ ] A4: Home / Landing — Hero, featured destinations, trending tours, search CTA
 
 ## Next — Public Domain (Phase B)

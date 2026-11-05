@@ -9,9 +9,12 @@
 - [x] Update git user config (name: abel, email: abelshikanda3@gmail.com)
 - [x] Create docs/WORKFLOW.md (branch-first development rules)
 
+## Done — Foundation (Phase A)
+- [x] A1: Design System — Tailwind config, cn() util, shadcn/ui primitives, theme
+- [x] A2: Layout & Shell — Sidebar, header, footer, breadcrumbs, public/authenticated layouts
+
 ## Next — Foundation (Phase A)
-- [ ] A1: Design System — Tailwind config, cn() util, shadcn/ui primitives, theme
-- [ ] A2: Layout & Shell — AppLayout, sidebar, header/navbar, footer, breadcrumbs
+- [ ] Wire routes & layouts — Connect TourLayout/TourAuthenticatedLayout to Breeze pages + add routes/web.php so frontend is visible
 - [ ] A3: Authentication — Login, register, password reset, profile (Breeze + Sanctum)
 - [ ] A4: Home / Landing — Hero, featured destinations, trending tours, search CTA
 

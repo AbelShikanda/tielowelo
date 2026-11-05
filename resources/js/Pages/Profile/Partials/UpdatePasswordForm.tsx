@@ -1,7 +1,7 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
@@ -64,7 +64,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value="Current Password"
                     />
 
-                    <TextInput
+                    <Input
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
@@ -85,7 +85,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 <div>
                     <InputLabel htmlFor="password" value="New Password" />
 
-                    <TextInput
+                    <Input
                         id="password"
                         ref={passwordInput}
                         value={data.password}
@@ -104,7 +104,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value="Confirm Password"
                     />
 
-                    <TextInput
+                    <Input
                         id="password_confirmation"
                         value={data.password_confirmation}
                         onChange={(e) =>
@@ -122,7 +122,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button disabled={processing}>Save</Button>
 
                     <Transition
                         show={recentlySuccessful}

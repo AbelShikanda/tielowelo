@@ -143,7 +143,13 @@ export default function AvailabilityBook({ tour, departure }: AvailabilityBookPr
                                             variant="outline"
                                             asChild
                                         >
-                                            <Link href="#checkout">Proceed to Checkout</Link>
+                                            <Link
+                                                href={route('bookings.create', {
+                                                    departure: departure.id,
+                                                })}
+                                            >
+                                                Proceed to Checkout
+                                            </Link>
                                         </Button>
                                     </div>
                                 </div>

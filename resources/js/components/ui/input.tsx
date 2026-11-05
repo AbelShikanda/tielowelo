@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, ...props }, ref) => {
+    ({ className, type, isFocused, ...props }, ref) => {
         return (
             <input
                 type={type}

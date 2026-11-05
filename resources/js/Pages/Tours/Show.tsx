@@ -141,6 +141,23 @@ export default function ToursShow({ tour }: ToursShowProps) {
                                     ))}
                                 </div>
                             </section>
+
+                            {/* Reviews */}
+                            <section className="space-y-4" id="reviews">
+                                <h3 className="text-xl font-bold text-gray-900">
+                                    Traveler Reviews
+                                </h3>
+                                <p className="text-sm text-gray-600">
+                                    Read what other travelers have to say about
+                                    this tour.
+                                </p>
+                                <Link
+                                    href={route('reviews.index', tour)}
+                                    className="inline-flex items-center gap-2 rounded-md bg-travel-50 px-4 py-2 text-sm font-semibold text-travel-600 shadow-sm hover:bg-travel-100 focus:outline-none focus:ring-2 focus:ring-travel-500 focus:ring-offset-2 transition-colors"
+                                >
+                                    View all reviews <ArrowRight className="ml-1 h-4 w-4" />
+                                </Link>
+                            </section>
                         </div>
 
                         {/* Sidebar */}

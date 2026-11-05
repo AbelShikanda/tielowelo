@@ -7,6 +7,7 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserBookingsController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,6 +17,10 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
 Route::get('/tours/{tour}', [TourController::class, 'show'])->name('tours.show');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/tours/{tour}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+});
 
 Route::get('/tours/{tour}/availability', [AvailabilityController::class, 'index'])->name('availability.index');
 Route::post('/tours/{tour}/availability/check', [AvailabilityController::class, 'check'])->name('availability.check');

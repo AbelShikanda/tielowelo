@@ -44,6 +44,11 @@ class Tour extends Model
         return $this->hasMany(Departure::class)->orderBy('departure_date');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class)->orderBy('created_at', 'desc');
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

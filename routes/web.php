@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DestinationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
+Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

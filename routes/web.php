@@ -25,6 +25,11 @@ Route::get('/bookings/{booking}/confirm', [BookingController::class, 'confirm'])
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::get('/bookings/create/{departure}', [BookingController::class, 'create'])->name('bookings.create');
 
+Route::get('/payments/checkout/{booking}', [PaymentController::class, 'checkout'])->name('payment.checkout');
+Route::get('/payments/success/{booking}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payments/cancel/{booking}', [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::post('/payments/webhook', [PaymentController::class, 'webhook'])->name('payment.webhook');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

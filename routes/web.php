@@ -6,6 +6,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UserBookingsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/bookings', [UserBookingsController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/{booking}', [UserBookingsController::class, 'show'])->name('bookings.show');
 });
 
 require __DIR__.'/auth.php';

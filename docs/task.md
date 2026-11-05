@@ -22,7 +22,7 @@
 - [x] B3: Availability — Date picker/calendar, departure selection, seat availability
 - [x] B4: Booking Flow — Multi-step wizard (dates → passengers → extras → summary)
 - [x] B5: Payments — Stripe Checkout via Cashier, success/cancel pages, receipt
-- [ ] B6: User Account — My bookings, booking detail, profile settings
+- [x] B6: User Account — My bookings, booking detail, profile settings
 - [ ] B7: Reviews — Tour ratings, review listing, add review form
 
 ## Next — Backend (Phase C)

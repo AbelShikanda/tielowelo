@@ -1,4 +1,4 @@
-import Link from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { Home, MapPin, UserCircle } from 'lucide-react';
 import { useState } from 'react';
 

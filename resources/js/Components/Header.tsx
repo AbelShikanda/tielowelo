@@ -1,4 +1,4 @@
-import Link from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { Menu, Bell, UserCircle } from 'lucide-react';
 import { useState } from 'react';
 

@@ -26,9 +26,9 @@ export default function DestinationsIndex({ destinations }: DestinationsIndexPro
                             Explore East Africa's most iconic locations
                         </p>
                     </div>
-                    <Button asChild>
-                        <Link href="/tours">View All Tours</Button>
-                    </Button>
+                        <Button asChild>
+                            <Link href="/tours">View All Tours</Link>
+                        </Button>
                 </div>
             }
             breadcrumbs={[

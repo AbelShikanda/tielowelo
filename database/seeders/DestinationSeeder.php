@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Destination;
 use App\Models\Tour;
+use App\Models\Departure;
+use Carbon\Carbon;
 
 class DestinationSeeder extends Seeder
 {
@@ -54,7 +56,7 @@ class DestinationSeeder extends Seeder
             'tour_count' => 6,
         ]);
 
-        Tour::create([
+        $serengetiTour = Tour::create([
             'destination_id' => $serengeti->id,
             'title' => 'Serengeti Great Migration Safari',
             'slug' => 'serengeti-great-migration-safari',
@@ -69,7 +71,34 @@ class DestinationSeeder extends Seeder
             'capacity' => 20,
         ]);
 
-        Tour::create([
+        Departure::create([
+            'tour_id' => $serengetiTour->id,
+            'departure_date' => Carbon::parse('2026-12-15'),
+            'capacity' => 20,
+            'available_seats' => 15,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $serengetiTour->id,
+            'departure_date' => Carbon::parse('2026-12-22'),
+            'capacity' => 20,
+            'available_seats' => 8,
+            'price_adjustment' => 50.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $serengetiTour->id,
+            'departure_date' => Carbon::parse('2027-01-05'),
+            'capacity' => 20,
+            'available_seats' => 20,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        $maasaiMaraTour = Tour::create([
             'destination_id' => $maasaiMara->id,
             'title' => 'Maasai Mara Big Cats Expedition',
             'slug' => 'maasai-mara-big-cats-expedition',
@@ -84,7 +113,34 @@ class DestinationSeeder extends Seeder
             'capacity' => 15,
         ]);
 
-        Tour::create([
+        Departure::create([
+            'tour_id' => $maasaiMaraTour->id,
+            'departure_date' => Carbon::parse('2026-12-10'),
+            'capacity' => 15,
+            'available_seats' => 12,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $maasaiMaraTour->id,
+            'departure_date' => Carbon::parse('2026-12-28'),
+            'capacity' => 15,
+            'available_seats' => 3,
+            'price_adjustment' => 75.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $maasaiMaraTour->id,
+            'departure_date' => Carbon::parse('2027-01-12'),
+            'capacity' => 15,
+            'available_seats' => 15,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        $zanzibarTour = Tour::create([
             'destination_id' => $zanzibar->id,
             'title' => 'Zanzibar Beach & Spice Tour',
             'slug' => 'zanzibar-beach-spice-tour',
@@ -99,7 +155,34 @@ class DestinationSeeder extends Seeder
             'capacity' => 25,
         ]);
 
-        Tour::create([
+        Departure::create([
+            'tour_id' => $zanzibarTour->id,
+            'departure_date' => Carbon::parse('2026-12-05'),
+            'capacity' => 25,
+            'available_seats' => 20,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $zanzibarTour->id,
+            'departure_date' => Carbon::parse('2026-12-20'),
+            'capacity' => 25,
+            'available_seats' => 2,
+            'price_adjustment' => 30.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $zanzibarTour->id,
+            'departure_date' => Carbon::parse('2027-01-08'),
+            'capacity' => 25,
+            'available_seats' => 25,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        $amboseliTour = Tour::create([
             'destination_id' => $amboseli->id,
             'title' => 'Amboseli Elephant Viewing',
             'slug' => 'amboseli-elephant-viewing',
@@ -112,6 +195,33 @@ class DestinationSeeder extends Seeder
             'inclusions' => 'Accommodation, meals, park fees, guide, transport.',
             'featured' => false,
             'capacity' => 18,
+        ]);
+
+        Departure::create([
+            'tour_id' => $amboseliTour->id,
+            'departure_date' => Carbon::parse('2026-12-12'),
+            'capacity' => 18,
+            'available_seats' => 10,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
+        ]);
+
+        Departure::create([
+            'tour_id' => $amboseliTour->id,
+            'departure_date' => Carbon::parse('2026-12-26'),
+            'capacity' => 18,
+            'available_seats' => 0,
+            'price_adjustment' => 0.00,
+            'is_available' => false,
+        ]);
+
+        Departure::create([
+            'tour_id' => $amboseliTour->id,
+            'departure_date' => Carbon::parse('2027-01-15'),
+            'capacity' => 18,
+            'available_seats' => 18,
+            'price_adjustment' => 0.00,
+            'is_available' => true,
         ]);
     }
 }

@@ -161,7 +161,9 @@ export default function ToursShow({ tour }: ToursShowProps) {
                                         {tour.capacity} spots available
                                     </p>
                                     <Button className="w-full" asChild>
-                                        <Link href="#book">Book Now</Link>
+                                        <Link href={route('availability.index', tour)}>
+                                            Check Availability
+                                        </Link>
                                     </Button>
                                 </CardContent>
                             </Card>

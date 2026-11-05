@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\AvailabilityController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -13,6 +14,10 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
 Route::get('/tours/{tour}', [TourController::class, 'show'])->name('tours.show');
+
+Route::get('/tours/{tour}/availability', [AvailabilityController::class, 'index'])->name('availability.index');
+Route::post('/tours/{tour}/availability/check', [AvailabilityController::class, 'check'])->name('availability.check');
+Route::get('/tours/{tour}/availability/book/{departure}', [AvailabilityController::class, 'book'])->name('availability.book');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

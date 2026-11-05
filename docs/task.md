@@ -19,7 +19,7 @@
 ## Done — Public Domain (Phase B)
 - [x] B1: Destinations — Listing, detail page, cards, image gallery
 - [x] B2: Tours — Listing w/ search/filter, detail page, itinerary, map, inclusions
-- [ ] B3: Availability — Date picker/calendar, departure selection, seat availability
+- [x] B3: Availability — Date picker/calendar, departure selection, seat availability
 - [ ] B4: Booking Flow — Multi-step wizard (dates → passengers → extras → summary)
 - [ ] B5: Payments — Stripe Checkout via Cashier, success/cancel pages, receipt
 - [ ] B6: User Account — My bookings, booking detail, profile settings

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,6 +19,11 @@ Route::get('/tours/{tour}', [TourController::class, 'show'])->name('tours.show')
 Route::get('/tours/{tour}/availability', [AvailabilityController::class, 'index'])->name('availability.index');
 Route::post('/tours/{tour}/availability/check', [AvailabilityController::class, 'check'])->name('availability.check');
 Route::get('/tours/{tour}/availability/book/{departure}', [AvailabilityController::class, 'book'])->name('availability.book');
+
+Route::get('/bookings/{booking}/review', [BookingController::class, 'review'])->name('booking.review');
+Route::get('/bookings/{booking}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+Route::get('/bookings/create/{departure}', [BookingController::class, 'create'])->name('bookings.create');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

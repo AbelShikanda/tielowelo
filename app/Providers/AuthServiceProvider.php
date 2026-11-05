@@ -12,6 +12,7 @@ use App\Policies\DeparturePolicy;
 use App\Policies\ReviewPolicy;
 use App\Policies\TourPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {

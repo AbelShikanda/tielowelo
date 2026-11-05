@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Tour extends Model
+class Tour extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'destination_id',
@@ -20,7 +22,6 @@ class Tour extends Model
         'duration',
         'price',
         'rating',
-        'image',
         'itinerary',
         'inclusions',
         'featured',
@@ -32,6 +33,12 @@ class Tour extends Model
         static::creating(function (Tour $tour) {
             $tour->slug = Str::slug($tour->title);
         });
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
     }
 
     public function destination(): BelongsTo

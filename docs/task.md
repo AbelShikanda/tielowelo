@@ -16,8 +16,8 @@
 - [x] A3: Authentication — Login, register, password reset, profile (Breeze + Sanctum)
 - [x] A4: Home / Landing — Hero, featured destinations, trending tours, search CTA
 
-## Next — Public Domain (Phase B)
-- [ ] B1: Destinations — Listing, detail page, cards, image gallery
+## Done — Public Domain (Phase B)
+- [x] B1: Destinations — Listing, detail page, cards, image gallery
 - [ ] B2: Tours — Listing w/ search/filter, detail page, itinerary, map, inclusions
 - [ ] B3: Availability — Date picker/calendar, departure selection, seat availability
 - [ ] B4: Booking Flow — Multi-step wizard (dates → passengers → extras → summary)

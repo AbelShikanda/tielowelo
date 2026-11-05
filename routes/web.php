@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 

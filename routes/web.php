@@ -10,6 +10,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
 Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
+Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
+Route::get('/tours/{tour}', [TourController::class, 'show'])->name('tours.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

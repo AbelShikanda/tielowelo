@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Tour extends Model
@@ -36,6 +37,11 @@ class Tour extends Model
     public function destination(): BelongsTo
     {
         return $this->belongsTo(Destination::class);
+    }
+
+    public function departures(): HasMany
+    {
+        return $this->hasMany(Departure::class)->orderBy('departure_date');
     }
 
     public function getRouteKeyName(): string

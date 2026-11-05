@@ -21,7 +21,7 @@
 - [x] B2: Tours — Listing w/ search/filter, detail page, itinerary, map, inclusions
 - [x] B3: Availability — Date picker/calendar, departure selection, seat availability
 - [x] B4: Booking Flow — Multi-step wizard (dates → passengers → extras → summary)
-- [ ] B5: Payments — Stripe Checkout via Cashier, success/cancel pages, receipt
+- [x] B5: Payments — Stripe Checkout via Cashier, success/cancel pages, receipt
 - [ ] B6: User Account — My bookings, booking detail, profile settings
 - [ ] B7: Reviews — Tour ratings, review listing, add review form
 

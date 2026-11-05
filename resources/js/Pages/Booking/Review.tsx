@@ -65,6 +65,7 @@ export default function BookingReview({ booking }: BookingReviewProps) {
                 { href: route('availability.index', booking.departure.tour), label: 'Availability' },
                 { href: route('bookings.create', { departure: booking.departure.id }), label: 'Traveler Details' },
                 { href: route('booking.review', booking), label: 'Review' },
+                { href: route('payment.checkout', booking), label: 'Payment' },
             ]}
         >
             <Head title="Review Your Booking" />
@@ -246,7 +247,7 @@ export default function BookingReview({ booking }: BookingReviewProps) {
                                         asChild
                                     >
                                         <Link
-                                            href={route('booking.confirm', booking)}
+                                            href={route('payment.checkout', booking)}
                                         >
                                             Confirm & Pay <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>

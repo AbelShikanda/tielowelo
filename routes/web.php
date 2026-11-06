@@ -18,6 +18,7 @@ Route::get('/destinations/{destination}', [DestinationController::class, 'show']
 Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
 Route::get('/tours/{tour}', [TourController::class, 'show'])->name('tours.show');
 
+Route::get('/tours/{tour}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 Route::middleware('auth')->group(function () {
     Route::post('/tours/{tour}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });

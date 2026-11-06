@@ -51,4 +51,50 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/locale/{locale}', function ($locale) {
+    session(['locale' => $locale]);
+    return back();
+})->name('locale.switch');
+
+Route::get('/sitemap.xml', function () {
+    $tours = \App\Models\Tour::all();
+    $destinations = \App\Models\Destination::all();
+    $bookings = \App\Models\Booking::all();
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    $pages = ['/', '/tours', '/destinations'];
+    foreach ($pages as $page) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . config('app.url', 'http://localhost') . $page . '</loc>';
+        $xml .= '<lastmod>' . now()->toISOString() . '</lastmod>';
+        $xml .= '<changefreq>daily</changefreq>';
+        $xml .= '<priority>0.8</priority>';
+        $xml .= '</url>';
+    }
+
+    foreach ($destinations as $destination) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . config('app.url', 'http://localhost') . '/destinations/' . $destination->slug . '</loc>';
+        $xml .= '<lastmod>' . $destination->updated_at->toISOString() . '</lastmod>';
+        $xml .= '<changefreq>weekly</changefreq>';
+        $xml .= '<priority>0.7</priority>';
+        $xml .= '</url>';
+    }
+
+    foreach ($tours as $tour) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . config('app.url', 'http://localhost') . '/tours/' . $tour->slug . '</loc>';
+        $xml .= '<lastmod>' . $tour->updated_at->toISOString() . '</lastmod>';
+        $xml .= '<changefreq>weekly</changefreq>';
+        $xml .= '<priority>0.8</priority>';
+        $xml .= '</url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200, ['Content-Type' => 'application/xml']);
+})->name('sitemap');
+
 require __DIR__.'/auth.php';

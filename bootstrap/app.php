@@ -8,6 +8,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         \App\Providers\AuthServiceProvider::class,
         \App\Providers\EventServiceProvider::class,
+        \App\Providers\Filament\AdminPanelProvider::class,
         \Spatie\Permission\PermissionServiceProvider::class,
     ])
     ->withRouting(

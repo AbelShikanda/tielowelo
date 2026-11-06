@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Departure;
-use App\Mail\BookingConfirmationMail;
-use App\Mail\NewBookingAlertMail;
+use App\Jobs\SendBookingConfirmationJob;
+use App\Jobs\SendNewBookingAlertJob;
 use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -58,13 +56,13 @@ class BookingController extends Controller
             'special_requests' => $validated['special_requests'] ?? null,
         ]);
 
-        // Send booking confirmation email to customer
-        Mail::to($validated['customer_email'])->send(new BookingConfirmationMail($booking));
+        // Dispatch booking confirmation email job
+        SendBookingConfirmationJob::dispatch($booking, $validated['customer_email']);
 
-        // Send new booking alert to admins
+        // Dispatch new booking alert jobs to admins
         $adminEmails = config('admin.emails', []);
         foreach ($adminEmails as $adminEmail) {
-            Mail::to($adminEmail)->send(new NewBookingAlertMail($booking));
+            SendNewBookingAlertJob::dispatch($booking, $adminEmail);
         }
 
         // Send notification to authenticated user

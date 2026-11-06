@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
-use App\Mail\PaymentConfirmationMail;
+use App\Jobs\SendPaymentConfirmationJob;
+use App\Jobs\ProcessPaymentRetryJob;
 use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Cashier\Cashier;
@@ -85,8 +85,8 @@ class PaymentController extends Controller
                         'payment_completed' => true,
                     ]);
 
-                    // Send payment confirmation email
-                    Mail::to($booking->customer_email)->send(new PaymentConfirmationMail($booking));
+                    // Dispatch payment confirmation email job
+                    SendPaymentConfirmationJob::dispatch($booking, $booking->customer_email);
 
                     // Notify authenticated user
                     if ($request->user()) {
@@ -195,8 +195,8 @@ class PaymentController extends Controller
                         'payment_completed' => true,
                     ]);
 
-                    // Send payment confirmation email
-                    Mail::to($booking->customer_email)->send(new PaymentConfirmationMail($booking));
+                    // Dispatch payment confirmation email job
+                    SendPaymentConfirmationJob::dispatch($booking, $booking->customer_email);
                 }
     }
 }

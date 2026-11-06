@@ -52,7 +52,9 @@
 
 ## Next — Polish & Delivery (Phase E)
 - [ ] E1: Environment — .env.example with PG/Redis/Meilisearch/S3/Stripe vars
-- [ ] E2: Testing — Pest feature + unit tests
+## Done — Polish & Delivery (Phase E)
+- [x] E1: Environment — .env.example with all required vars
+- [x] E2: Testing — PHPUnit feature + unit tests (48 tests, 142 assertions)
 - [ ] E3: i18n — Multi-language support
 - [ ] E4: SEO — Meta tags, Open Graph, sitemap, structured data
 - [ ] E5: Image Optimization — Vite/Tailwind image handling, lazy loading

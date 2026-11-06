@@ -8,6 +8,7 @@ use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserBookingsController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -29,8 +30,17 @@ Route::get('/tours/{tour}/availability/book/{departure}', [AvailabilityControlle
 
 Route::get('/bookings/{booking}/review', [BookingController::class, 'review'])->name('booking.review');
 Route::get('/bookings/{booking}/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
-Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::get('/bookings/create/{departure}', [BookingController::class, 'create'])->name('bookings.create');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/bookings', [UserBookingsController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/{booking}', [UserBookingsController::class, 'show'])->name('bookings.show');
+});
 
 Route::get('/payments/checkout/{booking}', [PaymentController::class, 'checkout'])->name('payment.checkout');
 Route::get('/payments/success/{booking}', [PaymentController::class, 'success'])->name('payment.success');
@@ -40,14 +50,5 @@ Route::post('/payments/webhook', [PaymentController::class, 'webhook'])->name('p
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('/bookings', [UserBookingsController::class, 'index'])->name('bookings.index');
-    Route::get('/bookings/{booking}', [UserBookingsController::class, 'show'])->name('bookings.show');
-});
 
 require __DIR__.'/auth.php';

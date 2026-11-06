@@ -45,7 +45,7 @@ export default function TourLayout({ user, header, children }: TourLayoutProps) 
                                 </Link>
                             ))}
                             <Link
-                                href="/book"
+                                href="/tours"
                                 className="inline-flex items-center gap-2 rounded-md bg-travel-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-travel-700 focus:outline-none focus:ring-2 focus:ring-travel-500 focus:ring-offset-2 transition-colors"
                             >
                                 Book Now
@@ -150,7 +150,7 @@ export default function TourLayout({ user, header, children }: TourLayoutProps) 
                                 </Link>
                             ))}
                             <Link
-                                href="/book"
+                                href="/tours"
                                 onClick={() => setShowingNav(false)}
                                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-travel-600 bg-travel-50 hover:bg-travel-100 transition-colors"
                             >

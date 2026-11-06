@@ -8,6 +8,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         \App\Providers\AuthServiceProvider::class,
         \App\Providers\EventServiceProvider::class,
+        \Spatie\Permission\PermissionServiceProvider::class,
     ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

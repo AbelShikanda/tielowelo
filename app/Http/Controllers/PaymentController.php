@@ -121,27 +121,68 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Invalid signature'], 400);
         }
 
-        if ($event->type === 'checkout.session.completed') {
-            $session = $event->data->object;
-            $payment = Payment::where('stripe_checkout_session_id', $session->id)->first();
+        $session = $event->data->object ?? null;
 
-            if ($payment && $payment->status !== 'completed') {
-                $payment->update([
-                    'status' => 'completed',
-                    'stripe_payment_intent_id' => $session->payment_intent,
-                    'stripe_response' => json_encode($session),
-                ]);
-
-                $booking = Booking::find($payment->booking_id);
-                if ($booking) {
-                    $booking->update([
-                        'status' => 'confirmed',
-                        'payment_completed' => true,
-                    ]);
+        switch ($event->type) {
+            case 'checkout.session.completed':
+                if ($session) {
+                    $this->handleCheckoutSessionCompleted($session);
                 }
-            }
+                break;
+
+            case 'checkout.session.expired':
+                if ($session && isset($session->metadata['booking_id'])) {
+                    $booking = Booking::find($session->metadata['booking_id']);
+                    if ($booking && $booking->status === 'pending') {
+                        $booking->update(['status' => 'expired']);
+                    }
+                }
+                break;
+
+            case 'payment_intent.payment_failed':
+                if ($session && isset($session->metadata['booking_id'])) {
+                    $booking = Booking::find($session->metadata['booking_id']);
+                    if ($booking) {
+                        $booking->update(['status' => 'payment_failed']);
+                        $payment = Payment::where('booking_id', $booking->id)->first();
+                        if ($payment) {
+                            $payment->update(['status' => 'failed']);
+                        }
+                    }
+                }
+                break;
+
+            default:
+                // Unhandled event type
+                break;
         }
 
         return response()->json(['status' => 'success']);
+    }
+
+    /**
+     * Handle checkout.session.completed event.
+     */
+    protected function handleCheckoutSessionCompleted($session): void
+    {
+        $payment = Payment::where('stripe_checkout_session_id', $session->id)->first();
+
+        if (!$payment || $payment->status === 'completed') {
+            return;
+        }
+
+        $payment->update([
+            'status' => 'completed',
+            'stripe_payment_intent_id' => $session->payment_intent,
+            'stripe_response' => json_encode($session),
+        ]);
+
+        $booking = Booking::find($payment->booking_id);
+        if ($booking) {
+            $booking->update([
+                'status' => 'confirmed',
+                'payment_completed' => true,
+            ]);
+        }
     }
 }

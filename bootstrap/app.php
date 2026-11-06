@@ -7,6 +7,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         \App\Providers\AuthServiceProvider::class,
+        \App\Providers\EventServiceProvider::class,
     ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Departure;
-use App\Jobs\SendBookingConfirmationJob;
-use App\Jobs\SendNewBookingAlertJob;
+use App\Events\BookingCreated;
 use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -56,14 +55,8 @@ class BookingController extends Controller
             'special_requests' => $validated['special_requests'] ?? null,
         ]);
 
-        // Dispatch booking confirmation email job
-        SendBookingConfirmationJob::dispatch($booking, $validated['customer_email']);
-
-        // Dispatch new booking alert jobs to admins
-        $adminEmails = config('admin.emails', []);
-        foreach ($adminEmails as $adminEmail) {
-            SendNewBookingAlertJob::dispatch($booking, $adminEmail);
-        }
+        // Fire booking created event (listeners handle emails)
+        event(new BookingCreated($booking));
 
         // Send notification to authenticated user
         if ($request->user()) {

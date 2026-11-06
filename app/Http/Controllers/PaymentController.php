@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
-use App\Jobs\SendPaymentConfirmationJob;
+use App\Events\PaymentCompleted;
 use App\Jobs\ProcessPaymentRetryJob;
 use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
@@ -85,8 +85,8 @@ class PaymentController extends Controller
                         'payment_completed' => true,
                     ]);
 
-                    // Dispatch payment confirmation email job
-                    SendPaymentConfirmationJob::dispatch($booking, $booking->customer_email);
+                    // Fire payment completed event (listener sends email)
+                    event(new PaymentCompleted($booking));
 
                     // Notify authenticated user
                     if ($request->user()) {
@@ -195,8 +195,8 @@ class PaymentController extends Controller
                         'payment_completed' => true,
                     ]);
 
-                    // Dispatch payment confirmation email job
-                    SendPaymentConfirmationJob::dispatch($booking, $booking->customer_email);
+                    // Fire payment completed event (listener sends email)
+                    event(new PaymentCompleted($booking));
                 }
     }
 }

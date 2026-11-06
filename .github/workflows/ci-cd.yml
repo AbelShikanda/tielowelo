@@ -55,7 +55,10 @@ jobs:
 
       - name: Run database seeders
         run: php artisan db:seed --force
-
+        
+      - name: Build assets
+        run: npm run build
+        
       - name: Run tests
         run: vendor/bin/phpunit
 

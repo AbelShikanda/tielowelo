@@ -86,6 +86,19 @@ export default function ToursShow({ tour }: ToursShowProps) {
                             <p className="text-travel-100 text-lg">
                                 {tour.destination.name}, {tour.destination.country}
                             </p>
+                            <div className="mt-4 flex items-center gap-3">
+                                <Button
+                                    className="bg-white text-travel-700 font-bold hover:bg-gray-100"
+                                    asChild
+                                >
+                                    <Link href={route('availability.index', tour)}>
+                                        Book Now
+                                    </Link>
+                                </Button>
+                                <span className="text-white font-bold text-xl">
+                                    ${tour.price} / person
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -179,7 +192,7 @@ export default function ToursShow({ tour }: ToursShowProps) {
                                     </p>
                                     <Button className="w-full" asChild>
                                         <Link href={route('availability.index', tour)}>
-                                            Check Availability
+                                            Select Date & Book
                                         </Link>
                                     </Button>
                                 </CardContent>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Laravel\Scout\Searchable;
@@ -33,6 +34,14 @@ class Tour extends Model implements HasMedia
     {
         static::creating(function (Tour $tour) {
             $tour->slug = Str::slug($tour->title);
+        });
+
+        static::saved(function (Tour $tour) {
+            Cache::forget("tour.{$tour->id}.available_departures");
+        });
+
+        static::deleted(function (Tour $tour) {
+            Cache::forget("tour.{$tour->id}.available_departures");
         });
     }
 

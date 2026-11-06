@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
-import { Home, MapPin, UserCircle } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { Home, MapPin, UserCircle, Globe } from 'lucide-react';
 import { useState } from 'react';
 
 interface GuestLayoutProps {
@@ -8,6 +8,7 @@ interface GuestLayoutProps {
 
 export default function GuestLayout({ children }: GuestLayoutProps) {
     const [showingNav, setShowingNav] = useState(false);
+    const { locale, locales } = usePage().props;
 
     const publicNavItems = [
         { href: '/', label: 'Home', icon: Home },
@@ -48,6 +49,22 @@ export default function GuestLayout({ children }: GuestLayoutProps) {
                             >
                                 Book Now
                             </Link>
+                            <div className="flex items-center gap-2">
+                                <Globe className="h-4 w-4 text-gray-600" />
+                                <select
+                                    defaultValue={locale}
+                                    onChange={(e) => {
+                                        window.location.href = `/locale/${e.target.value}`;
+                                    }}
+                                    className="text-sm text-gray-600 bg-transparent focus:ring-0"
+                                >
+                                    {locales.map(([code, name]) => (
+                                        <option key={code} value={code}>
+                                            {name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         <div className="flex items-center gap-4 md:hidden">

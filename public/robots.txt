@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+
+Disallow: /admin/
+Disallow: /payments/webhook
+Disallow: /bookings/
+
+Sitemap: http://localhost:8000/sitemap.xml

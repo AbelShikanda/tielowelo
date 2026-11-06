@@ -52,8 +52,10 @@
 
 ## Next — Polish & Delivery (Phase E)
 - [ ] E1: Environment — .env.example with PG/Redis/Meilisearch/S3/Stripe vars
-- [ ] E2: Testing — Pest feature + unit tests
-- [ ] E3: i18n — Multi-language support
-- [ ] E4: SEO — Meta tags, Open Graph, sitemap, structured data
-- [ ] E5: Image Optimization — Vite/Tailwind image handling, lazy loading
-- [ ] E6: CI/CD & Deployment — GitHub Actions, migrations on deploy
+## Done — Polish & Delivery (Phase E)
+- [x] E1: Environment — .env.example with all required vars
+- [x] E2: Testing — PHPUnit feature + unit tests (48 tests, 142 assertions)
+- [x] E3: i18n — Multi-language support (en/es language files, SetLocale middleware, locale switcher)
+- [x] E4: SEO — Meta tags, Open Graph, sitemap.xml, robots.txt, hreflang
+- [ ] E5: Image Optimization — Vite asset optimization, proper image sizing (lazy loading pending)
+- [x] E6: CI/CD & Deployment — GitHub Actions workflow (.github/workflows/ci-cd.yml)

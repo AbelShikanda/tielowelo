@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use App\Models\Tour;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -35,7 +36,7 @@ class ReviewController extends Controller
     /**
      * Store a newly created review.
      */
-    public function store(Request $request, Tour $tour): Response
+    public function store(Request $request, Tour $tour): RedirectResponse
     {
         $request->validate([
             'rating' => ['required', 'integer', 'min:1', 'max:5'],

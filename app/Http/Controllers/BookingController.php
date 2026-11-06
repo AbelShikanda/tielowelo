@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Departure;
 use App\Events\BookingCreated;
 use App\Notifications\BookingConfirmedNotification;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -27,7 +28,7 @@ class BookingController extends Controller
     /**
      * Store a new booking.
      */
-    public function store(Request $request): Response
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'departure_id' => ['required', 'exists:departures,id'],

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Mail\PaymentConfirmationMail;
+use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Cashier\Cashier;
@@ -81,6 +84,14 @@ class PaymentController extends Controller
                         'status' => 'confirmed',
                         'payment_completed' => true,
                     ]);
+
+                    // Send payment confirmation email
+                    Mail::to($booking->customer_email)->send(new PaymentConfirmationMail($booking));
+
+                    // Notify authenticated user
+                    if ($request->user()) {
+                        $request->user()->notify(new BookingConfirmedNotification($booking));
+                    }
                 }
             }
         }
@@ -178,11 +189,14 @@ class PaymentController extends Controller
         ]);
 
         $booking = Booking::find($payment->booking_id);
-        if ($booking) {
-            $booking->update([
-                'status' => 'confirmed',
-                'payment_completed' => true,
-            ]);
-        }
+                if ($booking) {
+                    $booking->update([
+                        'status' => 'confirmed',
+                        'payment_completed' => true,
+                    ]);
+
+                    // Send payment confirmation email
+                    Mail::to($booking->customer_email)->send(new PaymentConfirmationMail($booking));
+                }
     }
 }

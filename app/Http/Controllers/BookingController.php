@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Departure;
+use App\Mail\BookingConfirmationMail;
+use App\Mail\NewBookingAlertMail;
+use App\Notifications\BookingConfirmedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -52,6 +57,20 @@ class BookingController extends Controller
             'customer_phone' => $validated['customer_phone'] ?? null,
             'special_requests' => $validated['special_requests'] ?? null,
         ]);
+
+        // Send booking confirmation email to customer
+        Mail::to($validated['customer_email'])->send(new BookingConfirmationMail($booking));
+
+        // Send new booking alert to admins
+        $adminEmails = config('admin.emails', []);
+        foreach ($adminEmails as $adminEmail) {
+            Mail::to($adminEmail)->send(new NewBookingAlertMail($booking));
+        }
+
+        // Send notification to authenticated user
+        if ($request->user()) {
+            $request->user()->notify(new BookingConfirmedNotification($booking));
+        }
 
         return redirect()->route('booking.review', $booking);
     }
